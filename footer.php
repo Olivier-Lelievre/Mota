@@ -8,15 +8,8 @@
             ) 
         ); 
         ?>
-        <p>TOUS DROITS RÉSERVÉS</p>
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close">x</span>
-            </div>
-        </div>
-
+        <p class="textFooter">TOUS DROITS RÉSERVÉS</p>
+        <?php get_template_part( 'assets/parts/modal' ); ?>
     </footer>
     <?php wp_footer(); ?>
 </body>

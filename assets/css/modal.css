@@ -1,0 +1,109 @@
+/* MODAL (background) */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    opacity: 0.5;
+    transform: translateY(-115%);
+    transition: all 0.35s ease-out;
+}
+
+/* MODAL (content) */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    margin: auto;
+    border: 5px solid var(--secondary-normal-color);
+    width: 597px;
+    height: 769px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.modal-content img {
+    padding-top: 14px;
+    width: 886px;
+    height: 106px;
+}
+
+.openModal {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: all 0.35s ease-out;
+}
+
+.wpcf7 {
+    margin-top: 20px;
+    width: 265px
+}
+
+.wpcf7-text {
+    width: 265px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--secondary-light-color);
+}
+
+.wpcf7-textarea {
+    width: 265px;
+    height: 210px;
+    border-radius: 8px;
+    border: 1px solid var(--secondary-light-color);
+}
+
+.wpcf7 p label {
+    font-family: 'Poppins';
+    font-size: 12px;
+}
+
+.wpcf7-submit {
+    width: 271px;
+    height: 50px;
+    border-radius: 2px;
+    border: none;
+    background-color: var(--grey-medium);
+    font-family: 'SpaceMono';
+}
+
+
+@media (max-width: 768px) {
+
+    /* MODAL (content) */
+    .modal-content {
+        width: 286px;
+        height: 583px;
+    }
+    .modal-content img {
+        width: 460px;
+        height: 55px;
+    }
+    .wpcf7 {
+        margin-top: 0;
+        width: 190px;
+    }
+    .wpcf7 p {
+        text-align: left;
+        margin-top: 10px;
+    }
+    .wpcf7-text {
+        width: 190px;
+        height: 40px;
+    }
+    .wpcf7-textarea {
+        width: 190px;
+        height: 139px;
+    }
+    .wpcf7-submit {
+        width: 196px;
+        height: 50px;
+        border: 1px solid var(--secondary-medium-color);
+    }
+}

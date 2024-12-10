@@ -37,7 +37,3 @@ function register_footer_menu() {
     register_nav_menu( 'footer-menu', __( 'Bas de page', 'text-domain' ) );
 }
 add_action( 'after_setup_theme', 'register_footer_menu' );
-
-
-
-

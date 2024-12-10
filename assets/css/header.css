@@ -1,0 +1,141 @@
+#primary-menu {
+    display: flex;
+    gap: 25px;
+}
+
+#primary-menu li {
+    list-style-type: none;
+}
+
+#primary-menu li a {
+    text-decoration: none;
+    font-family: 'SpaceMono';
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: var(--secondary-normal-color);
+}
+
+#primary-menu li a:hover {
+    font-weight: 700;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 120px 0 120px;
+    border-bottom: var(--secondary-medium-color) 1px solid;
+}
+
+header a {
+    display: flex;
+    justify-content: center;
+}
+
+.logo-mota {
+    height: 14px;
+    width: 216px;
+}
+
+.textMenu {
+    font-family: 'SpaceMono';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: var(--secondary-normal-color);
+}
+
+
+
+/** BURGER **/
+header button {
+	border: 0;
+	background-color: transparent;
+}
+
+.line {
+	height: 3px;
+	background-color: #000;
+	display: block;
+	margin-block: 2px;
+	width: 20px;
+}
+
+.crossBurger span:nth-child(1) {
+    transform: rotate(45deg) translate(2.5px, 5px);
+}
+  
+.crossBurger span:nth-child(2) {
+    opacity: 0;
+}
+  
+.crossBurger span:nth-child(3) {
+    transform: rotate(-45deg) translate(2.5px, -5px);
+}
+
+
+
+/** RESPONSIVE **/
+
+
+header button {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    header {
+        height: 72px;
+        padding: 0;
+    }
+    header div {
+        display: flex;
+        z-index: 2;
+        background-color: #ffffff;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+        width: 100%;
+        margin: 0;
+        padding: 0 30px 0 30px;
+        border-bottom: var(--secondary-medium-color) 1px solid;
+    }
+    header div a {
+        display: flex;
+        align-items: center;
+    }
+    header nav {
+        display: flex;
+        position: fixed;
+        z-index: 0;
+        top: 73px;
+        left: 0;
+        width: 100%;
+        height: 93vh;
+        background-color: var(--primary-normal-color);
+        opacity: 0.5;
+        transform: translateY(-115%);
+        transition: all 0.25s ease-out;
+        
+    }
+    header button {
+        display: block;
+    }
+    #primary-menu {
+        flex-direction: column;
+        margin: auto;
+        padding:0;
+    }
+    #primary-menu li a {
+        font-size: 44px;
+        color: #ffffff
+    }
+}
+
+.openMenu {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: all 0.25s ease-in;
+}
