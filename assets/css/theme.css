@@ -1,6 +1,7 @@
 @import "header.css";
 @import "footer.css";
 @import "modal.css";
+@import "singlePhoto.css";
 
 
 
@@ -62,7 +63,9 @@ h2 {
     font-weight: 400;
     font-style: italic;
     font-size: 66px;
+    line-height: 105%;
     text-transform: uppercase;
+    margin: 0;
     color: var(--secondary-normal-color);
 }
 
@@ -80,6 +83,9 @@ p {
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
+    line-height: normal;
+    margin: 0;
+    text-transform: uppercase;
     color: var(--secondary-normal-color);
 }
 
@@ -88,7 +94,7 @@ p {
     font-weight: 300;
     font-style: light;
     font-size: 14px;
-    text-transform: uppercase;
+    text-transform: none;
     color: var(--secondary-normal-color);
 }
 

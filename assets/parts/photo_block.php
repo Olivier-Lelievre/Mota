@@ -1,0 +1,1 @@
+photos apparentées - template part
