@@ -53,7 +53,13 @@
 
 
                     
- 
+                <!-- navigation prev/next -->
+                <?php the_post_navigation( array(
+                    'prev_text' => __( '←' ),
+                    'next_text' => __( '→' ),
+                    'screen_reader_text' => __( 'Post navigation' ),
+                    'aria_label' => __( 'Posts' )
+                ) ); ?>
 
 
 
@@ -64,48 +70,7 @@
 
 
 
-<?php
-// Récupérer le post précédent et suivant
-$prevPost = get_previous_post();
-$nextPost = get_next_post();
-?>
 
-<nav class="navigation-wrapper" aria-label="Navigation entre posts">
-    <!-- Navigation - post précedent -->
-    <div class="nav-item nav-prev">
-        <?php if ($prevPost) : ?>
-            <?php 
-            $prevThumbnail = get_field('image', $prevPost->ID);
-            if (!empty($prevThumbnail['url'])) : ?>
-                <div class="preview-image">
-                    <img src="<?php echo esc_url($prevThumbnail['url']); ?>" 
-                         alt="<?php echo esc_attr($prevThumbnail['alt']); ?>">
-                </div>
-            <?php endif; ?>
-            <a href="<?php echo get_permalink($prevPost->ID); ?>" class="nav-arrow" 
-               aria-label="Voir le post précédent : <?php echo esc_attr(get_the_title($prevPost->ID)); ?>">
-                ←
-            </a>
-        <?php endif; ?>
-    </div>
-    <!-- Navigation - post suivant -->
-    <div class="nav-item nav-next">
-        <?php if ($nextPost) : ?>
-            <?php 
-            $nextThumbnail = get_field('image', $nextPost->ID);
-            if (!empty($nextThumbnail['url'])) : ?>
-                <div class="preview-image">
-                    <img src="<?php echo esc_url($nextThumbnail['url']); ?>" 
-                         alt="<?php echo esc_attr($nextThumbnail['alt']); ?>">
-                </div>
-            <?php endif; ?>
-            <a href="<?php echo get_permalink($nextPost->ID); ?>" class="nav-arrow" 
-               aria-label="Voir le post suivant : <?php echo esc_attr(get_the_title($nextPost->ID)); ?>">
-                →
-            </a>
-        <?php endif; ?>
-    </div>
-</nav>
 
 
 

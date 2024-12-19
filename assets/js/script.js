@@ -14,13 +14,19 @@ buttonMobile.addEventListener('click', () => {
 /** MODALE CONTACT **/
 
 const modalContact = document.querySelector('#myModal');
-const buttonContact = document.querySelector('.menu-item-25');
+const menuButtonsContact = document.querySelectorAll('.menu-item-25, .buttonSingleContact');
 
-buttonContact.addEventListener('click', () => {
+// Fonction pour ouvrir/fermer la modale et fermer le menu burger
+const toggleModal = () => {
   modalContact.classList.toggle('openModal');
   /** fermer le menu burger **/
   menuMobile.classList.remove('openMenu');
   buttonMobile.classList.remove('crossBurger');
+};
+
+// Ajouter un gestionnaire d'événements à chaque élément
+menuButtonsContact.forEach(button => {
+  button.addEventListener('click', toggleModal);
 });
 
 /** fermeture de la modale - Clic en dehors **/
@@ -30,3 +36,23 @@ window.onclick = function(event) {
     modalContact.classList.remove('openMenu');
   }
 }
+
+
+
+
+
+
+
+// Champ Réf. photo prérempli (voir functions.php)
+const buttons = document.querySelector('.buttonSingleContact');
+    
+buttons.addEventListener('click', function() {
+    // Récupérer la valeur de `acfData.reference`
+    const referenceValue = acfData.reference;
+
+    // Mettre à jour le champ de formulaire avec l'ID "refPhoto-CF7"
+    const input = document.getElementById('refPhoto-CF7');
+    if (input) {
+        input.value = referenceValue;
+    }
+});

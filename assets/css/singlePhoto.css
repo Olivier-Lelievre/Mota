@@ -17,6 +17,7 @@ main {
 .photoContent01 {
     display: flex;
     flex-direction: row;
+    gap: 25px;
     height: inherit;
 }
 
@@ -37,10 +38,6 @@ main {
 
 .photoContent01-text p {
     line-height: 250%;
-}
-
-.photoContent01-image {
-    
 }
 
 .contentImage {
@@ -74,26 +71,75 @@ main {
     height: 50px;
     border:none;
     background-color: var(--grey-medium);
+    font-family: 'SpaceMono';
+}
+.photoContent02-contact button:hover {
+    color: white;
+    background-color: var(--secondary-normal-color);
+    cursor: pointer;
 }
 
 .photoContent02-nav {
     display: flex;
     justify-content: flex-end;
+    height: 118px;
 }
 
-.navigation .nav-links {
+/* Structure de navigation */
+.navigation-wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     width: 81px;
+    height: 118px;
 }
 
-.nav-next {
-    text-align: end;
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
-.nav-links div a {
+/* Styles des flèches */
+.nav-arrow {
+    font-size: 2rem;
     text-decoration: none;
     color: var(--secondary-normal-color);
-    font-size: x-large;
+    cursor: pointer;
+}
+
+/* Les prévisualisations sont masquées par défaut */
+.preview-image {
+    display: none;
+}
+
+.preview-image img {
+    width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Position des images */
+.nav-prev .preview-image {
+    width: 81px;
+    height: 71px;
+    top: 6px;
+}
+
+.nav-next .preview-image {
+    width: 81px;
+    height: 71px;
+    top: 6px;
+}
+
+.navigation-wrapper .nav-prev {
+    width: 40px;
+}
+
+.navigation-wrapper .nav-next {
+    width: 40px;
+    align-items: flex-end;
+}
+
+/* Afficher l'image au survol */
+.nav-item:hover .preview-image {
+    display: block;
 }
