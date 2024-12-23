@@ -1,5 +1,10 @@
+.degAfterHeader {
+    height: 20px;
+    background: linear-gradient(var(--grey-light), 5%, #ffffff);
+}
+
 main {
-    margin-top: 35px;
+    margin-top: 15px;
     padding-left: 120px;
     padding-right: 120px;
     display: flex;
@@ -12,21 +17,17 @@ main {
     justify-content: flex-end;
     height: 100vh;
     width: 100%;
+    overflow: hidden; /* Évite tout débordement */
 }
 
 .photoContent01 {
     display: flex;
     flex-direction: row;
     gap: 25px;
-    height: inherit;
+    height: 100%;
 }
 
 .photoContent01 div {
-    width: 50%;
-    overflow: hidden;
-}
-
-.photoContent01 div h2 {
     width: 50%;
 }
 
@@ -40,10 +41,22 @@ main {
     line-height: 250%;
 }
 
+.photoContent01 div h2 {
+    width: 50%;
+}
+
+.photoContent01-image {
+    width: 100%; /* Remplit toute la largeur */
+    height: 100%; /* Remplit toute la hauteur */
+    overflow: hidden; /* Empêche les débordements */
+    position: relative; /* Nécessaire pour des ajustements internes éventuels */
+}
+
 .contentImage {
-    width: 100%;
-	height: 100%;
-	object-fit: cover;
+    width: 100%; /* Remplit toujours toute la largeur du parent */
+    height: 100%; /* Remplit toujours toute la hauteur du parent */
+    object-fit: cover; /* Remplit l'espace tout en coupant l'excédent si nécessaire */
+    object-position: center; /* Centre l'image pour un rendu harmonieux */
 }
 
 .photoContent02 {
@@ -96,19 +109,24 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    position: relative;
 }
 
 /* Styles des flèches */
 .nav-arrow {
-    font-size: 2rem;
+    font-size: 1.6rem;
     text-decoration: none;
     color: var(--secondary-normal-color);
     cursor: pointer;
+    bottom: 8px;
+    position: relative;
 }
+
 
 /* Les prévisualisations sont masquées par défaut */
 .preview-image {
     display: none;
+    position: absolute;
 }
 
 .preview-image img {
@@ -142,4 +160,28 @@ main {
 /* Afficher l'image au survol */
 .nav-item:hover .preview-image {
     display: block;
+}
+
+
+.photoRelated div {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    margin-top: 20px;
+    margin-bottom: 45px;
+}
+
+.photoRelated h3 {
+    margin-top: 65px;
+}
+
+.photoRelated div div {
+    width: 50%;
+    height: 495px;
+}
+
+.imageBlockPhoto {
+    width: 100%;
+	height: 100%;
+    object-fit: cover;
 }

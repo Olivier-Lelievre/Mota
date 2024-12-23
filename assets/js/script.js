@@ -41,18 +41,12 @@ window.onclick = function(event) {
 
 
 
+// Champ RÉF. PHOTO prérempli (voir functions.php)
 
-
-// Champ Réf. photo prérempli (voir functions.php)
-const buttons = document.querySelector('.buttonSingleContact');
-    
-buttons.addEventListener('click', function() {
-    // Récupérer la valeur de `acfData.reference`
-    const referenceValue = acfData.reference;
-
-    // Mettre à jour le champ de formulaire avec l'ID "refPhoto-CF7"
-    const input = document.getElementById('refPhoto-CF7');
-    if (input) {
-        input.value = referenceValue;
-    }
-});
+jQuery(document).ready(function($) {
+  $(".buttonSingleContact").on('click', function() {
+      const referenceValue = acfData.reference;
+      // Mettre à jour le champ de formulaire avec la valeur du champ ACF
+      $("#refPhoto-CF7").val(referenceValue);
+  });
+}); 

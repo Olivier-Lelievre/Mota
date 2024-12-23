@@ -1,5 +1,8 @@
 <?php get_header(); ?>
-  <?php if( have_posts() ) : while( have_posts() ) : the_post(); ?>
+
+<?php if( have_posts() ) : while( have_posts() ) : the_post(); ?>
+
+<div class="degAfterHeader"> </div>
 
 <main>
     <div class="photoContent">
@@ -38,7 +41,8 @@
                 <?php
                 $image = get_field('image'); // Récupérer le champ ACF
                 if ($image) : ?>
-                    <img class="contentImage" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                    <img class="contentImage" src="<?php echo esc_url($image['sizes']['large']); ?>"
+                        alt="<?php echo esc_attr($image['alt']); ?>">
                 <?php endif; ?>
             </div>
         </div>
@@ -49,88 +53,91 @@
             </div>
             <div class="photoContent02-nav">
 
+                <?php
+                // Récupérer le post précédent et suivant
+                $prevPost = get_previous_post();
+                $nextPost = get_next_post();
+                ?>
+                <nav class="navigation-wrapper" aria-label="Navigation entre posts">
+                    <?php 
+                    function render_navigation_item($post, $direction) {
+                        if ($post) {
+                            $thumbnail = get_field('image', $post->ID);
+                            // opérateur ternaire pour écrire des conditions simples en une seule ligne
+                            $arrow = $direction === 'prev' ? '←' : '→';
+                            $ariaLabel = $direction === 'prev' ? 'précédent' : 'suivant';
+                            $class = $direction === 'prev' ? 'nav-prev' : 'nav-next';
+                            ?>
+                            <div class="nav-item <?php echo $class; ?>">
+                                <?php if (!empty($thumbnail['sizes']['thumbnail'])) : ?>
+                                    <div class="preview-image">
+                                        <img src="<?php echo esc_url($thumbnail['sizes']['thumbnail']); ?>"
+                                            alt="<?php echo esc_attr($thumbnail['alt']); ?>">
+                                    </div>
+                                <?php endif; ?>
+                                <a href="<?php echo get_permalink($post->ID); ?>" class="nav-arrow"
+                                aria-label="Voir le post <?php echo $ariaLabel; ?> : <?php echo esc_attr(get_the_title($post->ID)); ?>">
+                                    <?php echo $arrow; ?>
+                                </a>
+                            </div>
+                            <?php
+                        }
+                    }
 
-
-
-                    
- 
-
-
-
-
-
-
-
-
-
-
-<?php
-// Récupérer le post précédent et suivant
-$prevPost = get_previous_post();
-$nextPost = get_next_post();
-?>
-
-<nav class="navigation-wrapper" aria-label="Navigation entre posts">
-    <!-- Navigation - post précedent -->
-    <div class="nav-item nav-prev">
-        <?php if ($prevPost) : ?>
-            <?php 
-            $prevThumbnail = get_field('image', $prevPost->ID);
-            if (!empty($prevThumbnail['url'])) : ?>
-                <div class="preview-image">
-                    <img src="<?php echo esc_url($prevThumbnail['url']); ?>" 
-                         alt="<?php echo esc_attr($prevThumbnail['alt']); ?>">
-                </div>
-            <?php endif; ?>
-            <a href="<?php echo get_permalink($prevPost->ID); ?>" class="nav-arrow" 
-               aria-label="Voir le post précédent : <?php echo esc_attr(get_the_title($prevPost->ID)); ?>">
-                ←
-            </a>
-        <?php endif; ?>
-    </div>
-    <!-- Navigation - post suivant -->
-    <div class="nav-item nav-next">
-        <?php if ($nextPost) : ?>
-            <?php 
-            $nextThumbnail = get_field('image', $nextPost->ID);
-            if (!empty($nextThumbnail['url'])) : ?>
-                <div class="preview-image">
-                    <img src="<?php echo esc_url($nextThumbnail['url']); ?>" 
-                         alt="<?php echo esc_attr($nextThumbnail['alt']); ?>">
-                </div>
-            <?php endif; ?>
-            <a href="<?php echo get_permalink($nextPost->ID); ?>" class="nav-arrow" 
-               aria-label="Voir le post suivant : <?php echo esc_attr(get_the_title($nextPost->ID)); ?>">
-                →
-            </a>
-        <?php endif; ?>
-    </div>
-</nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    // Afficher le post précédent et suivant
+                    render_navigation_item($prevPost, 'prev');
+                    render_navigation_item($nextPost, 'next');
+                    ?>
+                </nav>
 
             </div>
         </div>
     </div>
     <div class="photoRelated">
-        <p>Vous aimerez aussi</p>
+        <h3>Vous aimerez aussi</h3>
+        <div>
+            <?php
+            // PHOTOS APPARENTÉES
+            // Réutilisation de $categories pour les photos apparentées
+            $current_photo_category_ids = array();
+
+            if ($categories && !is_wp_error($categories)) {
+                foreach ($categories as $category) {
+                    $current_photo_category_ids[] = $category->term_id;
+                }
+            }
+
+            $args = array(
+                'post_type' => 'photo',
+                'posts_per_page' => 2,
+                'orderby' => 'rand',
+                'tax_query' => array( // récupérer la taxonomie personnalisée 'categorie'
+                    array(
+                        'taxonomy' => 'categorie',
+                        'field'    => 'term_id',
+                        'terms'    => $current_photo_category_ids,
+                    ),
+                ),
+            );
+
+            // 2. On exécute la WP Query
+            $my_query = new WP_Query( $args );
+
+            // 3. On lance la boucle
+            if( $my_query->have_posts() ) : while( $my_query->have_posts() ) : $my_query->the_post();
+
+                // 4. On importe le fichier photo-block.php contenat ce qui est affiché
+                get_template_part( 'assets/parts/photo-block' );
+                
+            endwhile;
+            endif;
+            // 5. On réinitialise à la requête principale (important)
+            wp_reset_postdata();
+            ?>
+        </div>
     </div>
 </main>
 
-  <?php endwhile; endif; ?>
+<?php endwhile; endif; ?>
+
 <?php get_footer(); ?>

@@ -4,7 +4,6 @@ header {
     justify-content: space-between;
     height: 80px;
     padding: 0 120px 0 120px;
-    border-bottom: var(--secondary-medium-color) 1px solid;
 }
 
 header a {

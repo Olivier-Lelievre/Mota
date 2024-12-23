@@ -9,15 +9,34 @@ add_theme_support( 'title-tag' );
 
 
 
+
+
 function nmota_register_assets() {
-    // Déclarer le JS
-	wp_enqueue_script( 'nmota', get_template_directory_uri() . '/assets/js/script.js', array( ), '1.0', true);
+    // Déclarer jQuery
+    wp_enqueue_script('jquery');
+    // Déclarer le fichier JS principal
+    wp_enqueue_script('nmota', get_template_directory_uri() . '/assets/js/script.js', ['jquery'], '1.0', true);
+
+// Champ Réf. photo prérempli : localiser les données ACF uniquement si nécessaire
+
+    if (is_singular('photo')) {
+        // Récupérer l'ID du post
+        $post_id = get_the_ID();
+        // Récupérer la valeur du champ personnalisé "reference" du groupe "Photographie"
+        $reference = get_field('reference', $post_id);
+        // Passer cette valeur à un script JavaScript
+        wp_localize_script('nmota', 'acfData', [
+            'reference' => $reference ? $reference : '',
+        ]);
+    }
+
     // Déclarer le fichier style.css à la racine du thème
-    wp_enqueue_style( 'nmota-style', get_stylesheet_uri(), array(), '1.0');
-    // Déclarer le fichier CSS à un autre emplacement
-    wp_enqueue_style( 'nmota-theme', get_template_directory_uri() . '/assets/css/theme.css', array(), '1.0');
+    wp_enqueue_style('nmota-style', get_stylesheet_uri(), [], '1.0');
+    // Déclarer un fichier CSS supplémentaire
+    wp_enqueue_style('nmota-theme', get_template_directory_uri() . '/assets/css/theme.css', [], '1.0');
 }
-add_action( 'wp_enqueue_scripts', 'nmota_register_assets' );
+add_action('wp_enqueue_scripts', 'nmota_register_assets');
+
 
 
 
@@ -63,23 +82,3 @@ function nmota_register_post_types() {
 	register_post_type( 'photo', $args ); // !!!!! SLUG !!!!! Une fois le CPT enregistré, ne jamais changer ce nom 'photo' (slug) !!!!!
 }
 add_action( 'init', 'nmota_register_post_types' );
-
-
-
-
-
-// Champ Réf. photo prérempli
-function passer_donnees_acf_a_js() {
-    if (is_singular('photo')) { // Charger uniquement sur les pages de type "photo"
-        // Récupérer l'ID du post
-        $post_id = get_the_ID();
-        // Récupérer la valeur du champ personnalisé "reference" du groupe "Photographie"
-        $reference = get_field('reference', $post_id);
-        // Passer cette valeur à un script JavaScript
-        wp_enqueue_script('script-global', get_template_directory_uri() . '/assets/js/script.js', [], null, true);
-        wp_localize_script('script-global', 'acfData', [
-            'reference' => $reference ? $reference : '',
-        ]);
-    }
-}
-add_action('wp_enqueue_scripts', 'passer_donnees_acf_a_js');
