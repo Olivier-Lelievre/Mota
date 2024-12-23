@@ -185,3 +185,64 @@ main {
 	height: 100%;
     object-fit: cover;
 }
+
+
+
+
+
+@media (max-width: 1224px) {
+    .photoContent02-contact button {
+        width: 152px;
+    }
+    .photoContent {
+        z-index: -1;
+    }
+}
+
+@media (max-width: 1024px) {
+    .photoContent01 , .photoContent02 {
+        flex-direction: column-reverse;
+    }
+    .photoContent01 div {
+        width: 100%;
+    }
+    .photoContent {
+        height: 100%;
+    }
+    .photoContent02-nav {
+        display: none;
+    }
+    .photoContent02 {
+        align-items: flex-start;
+        justify-content: center;
+        height: 135px;
+    }
+    .photoContent02 div {
+        width: 100%;
+    }
+    .photoContent02-contact {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .photoContent02-contact button {
+        width: 272px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .photoRelated div {
+        flex-direction: column;
+    }
+    .photoRelated div div {
+        width: 100%;
+    }
+    main {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .photoContent01 div h2 {
+        font-size: 36px;
+        padding-bottom: 15px;
+    }
+}
