@@ -1,0 +1,74 @@
+.zoneHero {
+  position: relative;
+  z-index: -1; 
+  width: 100%;
+  min-height: 253px;
+  max-height: 962px;
+  height: 100vh; /* Ajuste la hauteur en fonction de l'écran */
+  overflow: hidden; /* Cache les débordements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Classe pour l'image en background */
+.random-photo-background {
+  background-size: cover; /* Couvre toute la zone */
+  background-position: center; /* Centre l'image */
+  background-repeat: no-repeat;
+  width: 100%; /* Pleine largeur */
+  height: 100%; /* Prend 100% de la hauteur définie par .zoneHero */
+}
+
+  
+  .textHero {
+    position: absolute;
+    z-index: 0;
+  }
+  
+  .textHero p {
+    text-align: center;
+    font-family: 'SpaceMono';
+    font-size: 96px;
+    font-weight: bold;
+    font-style: italic;
+    -webkit-text-fill-color: transparent; 
+    -webkit-text-stroke:2px white;
+    color: white; /* Couleur du texte pour les navigateurs ne prenant pas en charge webkit (ie) */
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+
+.image-gallery-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.image-gallery {
+  width: 1148px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-gallery div {
+  width: 48%;
+  height: 495px;
+  padding: 10px;
+}
+
+
+
+  @media (max-width: 1024px) {
+    .textHero p {
+        font-size: 62px;
+    }
+}
+
+  @media (max-width: 768px) {
+    .textHero p {
+        font-size: 36px;
+        -webkit-text-stroke:1.3px #fff;
+    }
+}
