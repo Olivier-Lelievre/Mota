@@ -10,7 +10,7 @@ add_theme_support( 'title-tag' );
 
 
 
-// Chargement des styles et scripts
+// CHARGEMENT DES SCRIPTS ET STYLES
 
 function nmota_register_assets() {
     // Déclarer jQuery
@@ -30,13 +30,15 @@ function nmota_register_assets() {
         ]);
     }
 
+// Chargement du script filter.js pour la page d'accueil
+    if (is_front_page()) {
+        wp_enqueue_script('mota_photos', get_template_directory_uri() . '/assets/js/filter.js', ['jquery'], '1.0', true);
+    }
+
 // Déclarer le fichier style.css à la racine du thème
     wp_enqueue_style('nmota-theme', get_template_directory_uri() . '/assets/css/theme.css', [], '1.0');
 }
 add_action('wp_enqueue_scripts', 'nmota_register_assets');
-
-
-
 
 
 
@@ -56,7 +58,7 @@ add_action( 'after_setup_theme', 'nmota_register_footer_menu' );
 
 
 
-// création des CPT
+// CRÉATION DU CPT 'PHOTO'
 
 // !!!!! Ne pas oublier d'enregistrer les modifications dans le menu Réglages/Permaliens après la création d'un CPT !!!!!
 function nmota_register_post_types() {
@@ -87,7 +89,7 @@ add_action( 'init', 'nmota_register_post_types' );
 
 
 
-// fonction et shortcode pour afficher une photo aléatoire dans le hero de la page d'accueil
+// CHARGEMENT PHOTO EN ALÉATOIRE DANS LE HÉRO DE LA PAGE D'ACCUEIL
 
 function my_random_photo_shortcode() {
     // 1. Préparer la variable de sortie
@@ -95,14 +97,14 @@ function my_random_photo_shortcode() {
 
     // 2. Configurer la WP Query
     $args = array(
-        'post_type' => 'photo', // CPT "photo"
-        'posts_per_page' => 1, // 1 seul post
-        'orderby' => 'rand', // Aléatoire
-        'tax_query' => array( // Filtrer par la taxonomie "format"
+        'post_type' => 'photo',
+        'posts_per_page' => 1, 
+        'orderby' => 'rand', 
+        'tax_query' => array( 
             array(
                 'taxonomy' => 'format',
                 'field' => 'slug',
-                'terms' => 'paysage', // Terme "paysage"
+                'terms' => 'paysage',
             ),
         ),
     );
@@ -138,3 +140,60 @@ function my_random_photo_shortcode() {
 add_shortcode('my_random_photo', 'my_random_photo_shortcode');
 // Autoriser les shortcodes dans les widgets texte
 add_filter('widget_text', 'do_shortcode');
+
+
+
+
+
+// GALERIE PHOTOS SUR LA PAGE D'ACCUEIL - LOAD MORE
+
+function mota_load_photos() {
+    // Vérification de sécurité
+    check_ajax_referer('mota_load_photos', 'nonce');
+
+    // Paramètres d'offset
+    $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+    $limit = 8; // Nombre de photos à charger
+
+    // Arguments de la WP_Query
+    $args = array(
+        'post_type'      => 'photo',
+        'posts_per_page' => $limit,
+        'offset'         => $offset,
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        ob_start(); // Démarrer le buffer de sortie (stocké temporairement dans une mémoire tampon (buffer) au lieu d’être directement envoyé au navigateur)
+
+        while ($query->have_posts()) : $query->the_post();
+
+            // Importer la mise en page d'une photo
+            get_template_part('assets/parts/photo-block');
+
+        endwhile;
+
+        $html = ob_get_clean(); // Récupérer le contenu HTML généré dynamiquement (buffer) et le stocker dans une variable ($html)
+
+        // Calculer le nouvel offset
+        $new_offset = $offset + $limit;
+
+        // Vérifier s'il reste des photos
+        $no_more_photos = $query->found_posts <= $new_offset;
+
+        // Réponse JSON (Envoie de ce contenu au format JSON pour que JavaScript puisse l’ajouter dynamiquement sur la page)
+        wp_send_json_success([
+            'html'           => $html,
+            'new_offset'     => $new_offset,
+            'no_more_photos' => $no_more_photos,
+        ]);
+    } else {
+        wp_send_json_error('Aucune photo trouvée.');
+    }
+
+    wp_die(); // Fin de la requête AJAX
+}
+
+add_action( 'wp_ajax_mota_load_photos', 'mota_load_photos' );
+add_action( 'wp_ajax_nopriv_mota_load_photos', 'mota_load_photos' );
