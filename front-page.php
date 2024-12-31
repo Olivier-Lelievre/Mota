@@ -10,46 +10,55 @@
 </div>
 
 
+
+
 <!-- Filtres -->
 
 <div class="filters-wrapper">
-    <div>
-        <!-- Filtre Catégories -->
-        <select id="category-filter" class="category-select" aria-label="Filtrer par catégorie">
-            <option value="">CATÉGORIES</option>
-            <?php
-            // Afficher les catégories disponibles
-            $categories = get_terms(array(
-                'taxonomy' => 'categorie', // Taxonomie des catégories
-            ));
-            foreach ($categories as $category) :
-                echo '<option value="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</option>';
-            endforeach;
-            ?>
-        </select>
-
-        <!-- Filtre Formats -->
-        <select id="format-filter" class="format-select" aria-label="Filtrer par format">
-            <option value="">FORMATS</option>
-            <?php
-            // Afficher les catégories disponibles
-            $formats = get_terms(array(
-                'taxonomy' => 'format', // Taxonomie des catégories
-            ));
-            foreach ($formats as $format) :
-                echo '<option value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</option>';
-            endforeach;
-            ?>
-        </select>
+    <div class="under-filters-wrapper">
+        <div class="array-filters">
+            <!-- Filtre Catégories -->
+            <select id="category-filter" class="category-select" aria-label="Filtrer par catégorie">
+                <option value="">CATÉGORIES</option>
+                <?php
+                // Afficher les catégories disponibles
+                $categories = get_terms(array(
+                    'taxonomy' => 'categorie', // Taxonomie des catégories
+                ));
+                foreach ($categories as $category) :
+                    echo '<option value="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</option>';
+                endforeach;
+                ?>
+            </select>
+        </div>
+        <div class="array-filters">
+            <!-- Filtre Formats -->
+            <select id="format-filter" class="format-select" aria-label="Filtrer par format">
+                <option value="">FORMATS</option>
+                <?php
+                // Afficher les catégories disponibles
+                $formats = get_terms(array(
+                    'taxonomy' => 'format', // Taxonomie des catégories
+                ));
+                foreach ($formats as $format) :
+                    echo '<option value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</option>';
+                endforeach;
+                ?>
+            </select>
+        </div>
     </div>
 
     <!-- Filtre Trier par date -->
-    <select name="date-sort" id="date-filter" aria-label="Trier par date">
-        <option value="ALL">TRIER PAR</option>
-        <option value="DESC">à partir des plus récentes</option>
-        <option value="ASC">à partir des plus anciennes</option>
-    </select>
+    <div class="array-filters">
+        <select name="date-sort" id="date-filter" aria-label="Trier par date">
+            <option value="ALL">TRIER PAR</option>
+            <option value="DESC">à partir des plus récentes</option>
+            <option value="ASC">à partir des plus anciennes</option>
+        </select>
+    </div>
 </div>
+
+
 
 
 <!-- Galerie d'images -->
@@ -79,6 +88,9 @@
         wp_reset_postdata(); ?>
     </div>
 </div>
+
+
+
 
 <!-- bouton Load more -->
 <div class="load-more-photos">

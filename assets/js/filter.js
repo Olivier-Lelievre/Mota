@@ -1,57 +1,77 @@
 (function ($) {
     $(document).ready(function () {
+        const gallery = $('.image-gallery');
+        const button = $('.bt-load-more-photos');
+        let offset = 8; // Nombre initial d'images chargées
+        let filters = {
+            category: '',
+            format: '',
+            date: 'DESC',
+        };
 
-        // Chargement des photos en Ajax
-        $('.bt-load-more-photos').click(function (e) {
+        // Mise à jour des filtres
+        $('.filters-wrapper select').change(function () {
+            filters.category = $('#category-filter').val();
+            filters.format = $('#format-filter').val();
+            filters.date = $('#date-filter').val();
 
-            // Empêcher l'envoi classique (pas de rchargement de la page)
+            offset = 0; // Réinitialiser l'offset
+            gallery.empty(); // Vider la galerie
+            button.data('offset', 0); // Réinitialiser l'offset sur le bouton
+
+            loadPhotos(true); // Recharger les photos avec les nouveaux filtres
+        });
+
+        // Bouton "Charger plus"
+        button.click(function (e) {
             e.preventDefault();
+            loadPhotos(false); // Charger plus sans réinitialisation
+        });
 
-            // Bouton et galerie
-            const button = $(this);
-            const gallery = $('.image-gallery');
-
-            // Récupération des données
+        function loadPhotos(reset = false) {
             const ajaxurl = button.data('ajaxurl');
             const data = {
                 action: button.data('action'),
                 nonce: button.data('nonce'),
-                offset: button.data('offset'), // L'offset actuel
-            }
+                offset: reset ? 0 : offset, // Réinitialiser ou continuer
+                category: filters.category,
+                format: filters.format,
+                date: filters.date,
+            };
 
-            // Envoyer la requête AJAX
             fetch(ajaxurl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Cache-Control': 'no-cache',
                 },
                 body: new URLSearchParams(data),
             })
+                .then(response => response.json())
+                .then(body => {
+                    if (!body.success) {
+                        alert('Erreur : ' + body.data);
+                        return;
+                    }
 
-            
-            // La suite du script sera lancé quand le serveur aura répondu -> HOOK dans functions.php
-            .then(response => response.json())
-            .then(body => {
+                    // Ajouter les nouvelles photos
+                    gallery.append(body.data.html);
 
-                // Vérifie la réponse renvoyée par le serveur (succès ou erreur)
-                if (!body.success) {
-                    alert('Erreur : ' + body.data); // body.data : contient un message d'erreur spécifique envoyé par le serveur via la fonction wp_send_json_error() dans WordPress
-                    return;
-                }
+                    // Mettre à jour l'offset
+                    offset = body.data.new_offset;
+                    button.data('offset', offset);
 
-                // Ajouter les nouvelles photos
-                gallery.append(body.data.html);
-
-                // Mettre à jour l'offset
-                button.data('offset', body.data.new_offset);
-
-                // Cacher le bouton si plus de photos
-                if (body.data.no_more_photos) {
-                    button.hide();
-                }
-            })
-            
-        });
+                    // Afficher ou masquer le bouton
+                    if (body.data.no_more_photos) {
+                        button.hide();
+                    } else {
+                        button.show(); // Toujours afficher si d'autres photos existent
+                    }
+                });
+        }
     });
 })(jQuery);
+
+
+
+
+

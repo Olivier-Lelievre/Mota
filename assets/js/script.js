@@ -40,7 +40,6 @@ window.onclick = function(event) {
 
 
 
-
 // Champ RÉF. PHOTO prérempli (voir functions.php)
 
 jQuery(document).ready(function($) {

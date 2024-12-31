@@ -21,23 +21,23 @@
 }
 
   
-  .textHero {
-    position: absolute;
-    z-index: 0;
-  }
+.textHero {
+  position: absolute;
+  z-index: 0;
+}
   
-  .textHero p {
-    text-align: center;
-    font-family: 'SpaceMono';
-    font-size: 96px;
-    font-weight: bold;
-    font-style: italic;
-    -webkit-text-fill-color: transparent; 
-    -webkit-text-stroke:2px white;
-    color: white; /* Couleur du texte pour les navigateurs ne prenant pas en charge webkit (ie) */
-    margin-left: 60px;
-    margin-right: 60px;
-  }
+.textHero p {
+  text-align: center;
+  font-family: 'SpaceMono';
+  font-size: 96px;
+  font-weight: bold;
+  font-style: italic;
+  -webkit-text-fill-color: transparent; 
+  -webkit-text-stroke:2px white;
+  color: white; /* Couleur du texte pour les navigateurs ne prenant pas en charge webkit (ie) */
+  margin-left: 60px;
+  margin-right: 60px;
+}
 
 .filters-wrapper {
   width: 1124px;
@@ -49,21 +49,109 @@
   padding-bottom: 35px;
 }
 
-.filters-wrapper div select {
+.under-filters-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap:30px
+}
+
+.array-filters {
+  position: relative;
+}
+
+.array-filters::after {
+  content: '⌵'; /* Icone de la flèche */
+  position: absolute;
+  right: 20px; /* Ajustez selon vos besoins */
+  top: 50%;
+  transform: translateY(-65%);
+  pointer-events: none; /* La flèche ne doit pas interagir */
+}
+
+#format-filter {
+  font-family: 'Poppins';
+  font-size: 12px;
+  position: relative;
   width: 260px;
   height: 43px;
-  margin-right: 25px;
   padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--secondary-light-color);
+  appearance: none; /* Supprime l'apparence par défaut du select */
+}
+
+#date-filter {
+  font-family: 'Poppins';
+  font-size: 12px;
+  width: 260px;
+  height: 43px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--secondary-light-color);
+  appearance: none; /* Supprime l'apparence par défaut du select */
+}
+
+/*  SELECT2 pour filtre Catégories */
+
+/* Conteneur principal */
+.select2-container .select2-selection--single {
+  position: relative;
+  width: 260px;
+  height: 43px;
+  padding: 10px;
+
   border-radius: 8px;
   border: 1px solid var(--secondary-light-color);
 }
 
-.filters-wrapper select {
-  width: 260px;
-  height: 43px;
+/* Placeholder */
+.select2-selection__rendered .select2-selection__placeholder {
+  color: var(--secondary-normal-color) !important;
+  font-family: 'Poppins';
+  font-size: 12px;
+}
+
+#select2-category-filter-container {
+  font-family: 'Poppins';
+  font-size: 12px;
+}
+
+/* Flèche déroulante */
+.select2-container .select2-selection__arrow {
+  display: none;
+}
+
+/* Texte dans le champ */
+.select2-container .select2-selection__rendered {
+  transform: translateY(-10%);
+  line-height: 40px;
+  padding-left: 10px;
+}
+
+/* Options dans la liste déroulante */
+.select2-container .select2-results__option {
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--secondary-light-color);
+  font-family: 'Poppins';
+  font-size: 12px;
+  color: var(--secondary-normal-color);
+}
+
+/* Option au survol */
+.select2-container .select2-results__option--highlighted {
+  background-color: var(--primary-medium-color) !important;
+  color: white;
+}
+
+/* Option sélectionnée */
+.select2-container .select2-results__option--selected {
+  color: white;
+  background-color: var(--primary-normal-color) !important;
+}
+
+/* Croix */
+.select2-selection__clear span {
+  padding-right: 15px;
+  color: var(--secondary-light-color);
 }
 
 .image-gallery-wrapper {
