@@ -95,7 +95,7 @@
     </div>
     <div class="photoRelated">
         <h3>Vous aimerez aussi</h3>
-        <div>
+        <div class="images-photoRelated">
             <?php
             // PHOTOS APPARENTÉES
             // Réutilisation de $categories pour les photos apparentées

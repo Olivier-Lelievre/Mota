@@ -1,0 +1,125 @@
+/* FILTRES */
+
+.filters-wrapper {
+    max-width: 1124px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    padding-top: 95px;
+    padding-bottom: 35px;
+  }
+  
+  .under-filters-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap:30px;
+  }
+  
+  .array-filters {
+    position: relative;
+  }
+  
+  .array-filters::after {
+    content: '⌵'; /* Icone de la flèche */
+    position: absolute;
+    right: 20px; /* Ajustez selon vos besoins */
+    top: 50%;
+    transform: translateY(-65%);
+    pointer-events: none; /* La flèche ne doit pas interagir */
+  }
+  
+  /*  SELECT2 pour filtre Catégories */
+  
+  /* Conteneur principal */
+  .select2-container .select2-selection--single {
+    position: relative;
+    width: 260px;
+    height: 43px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--secondary-light-color);
+  }
+  
+  /* Placeholder */
+  .select2-selection__rendered .select2-selection__placeholder {
+    color: var(--secondary-normal-color) !important;
+    font-family: 'Poppins';
+    font-size: 12px;
+  }
+  
+  #select2-category-filter-container {
+    font-family: 'Poppins';
+    font-size: 12px;
+  }
+
+  #select2-format-filter-container {
+    font-family: 'Poppins';
+    font-size: 12px;
+  }
+
+  #select2-date-filter-container {
+    font-family: 'Poppins';
+    font-size: 12px;
+  }
+  
+  /* Flèche déroulante */
+  .select2-container .select2-selection__arrow {
+    display: none;
+  }
+  
+  /* Texte dans le champ */
+  .select2-container .select2-selection__rendered {
+    transform: translateY(-10%);
+    line-height: 40px;
+    padding-left: 10px;
+  }
+  
+  /* Options dans la liste déroulante */
+  .select2-container .select2-results__option {
+    padding: 10px;
+    font-family: 'Poppins';
+    font-size: 12px;
+    color: var(--secondary-normal-color);
+  }
+  
+  /* Option au survol */
+  .select2-container .select2-results__option--highlighted {
+    background-color: var(--primary-medium-color) !important;
+    color: white;
+  }
+  
+  /* Option sélectionnée */
+  .select2-container .select2-results__option--selected {
+    color: white;
+    background-color: var(--primary-normal-color) !important;
+  }
+  
+  /* Croix */
+  .select2-selection__clear span {
+    padding-right: 15px;
+    color: var(--secondary-light-color);
+  }
+
+  @media (max-width: 1117px) {
+    .filters-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      padding-top: 20px;
+    }
+    .under-filters-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: auto;
+      gap:0;
+    }
+    .array-filters {
+      width: 260px;
+      margin-top: 15px;
+    }
+  }

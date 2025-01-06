@@ -21,7 +21,7 @@
             <select id="category-filter" class="category-select" aria-label="Filtrer par catégorie">
                 <option value="">CATÉGORIES</option>
                 <?php
-                // Afficher les catégories disponibles
+                // Récupère et affiche les catégories disponibles dans la taxonomie "format"
                 $categories = get_terms(array(
                     'taxonomy' => 'categorie', // Taxonomie des catégories
                 ));
@@ -36,7 +36,7 @@
             <select id="format-filter" class="format-select" aria-label="Filtrer par format">
                 <option value="">FORMATS</option>
                 <?php
-                // Afficher les catégories disponibles
+                // Récupère et affiche les formats disponibles dans la taxonomie "format"
                 $formats = get_terms(array(
                     'taxonomy' => 'format', // Taxonomie des catégories
                 ));
@@ -95,14 +95,17 @@
 <!-- bouton Load more -->
 <div class="load-more-photos">
     <button
-        class="bt-load-more-photos"
-        data-offset="8"
-        data-nonce="<?php echo wp_create_nonce('mota_load_photos'); ?>"
-        data-action="mota_load_photos"
-        data-ajaxurl="<?php echo admin_url('admin-ajax.php'); ?>"
-    >Charger plus</button>
+        class="bt-load-more-photos" 
+        data-offset="8" 
+        data-nonce="<?php echo wp_create_nonce('mota_load_photos'); ?>" 
+        data-action="mota_load_photos" 
+        data-ajaxurl="<?php echo admin_url('admin-ajax.php'); ?>" 
+    >Charger plus</button> 
 </div>
 
-
+<!-- Indique l'offset initial (nombre d'images déjà chargées) -->
+<!-- Jeton de sécurité généré par WordPress pour valider la requête AJAX -->
+<!-- Nom de l'action définie dans PHP pour traiter la requête AJAX -->
+<!-- URL de l'endpoint AJAX pour envoyer la requête -->
 
 <?php get_footer();

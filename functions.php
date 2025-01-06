@@ -35,6 +35,9 @@ function nmota_register_assets() {
         wp_enqueue_script('mota_photos', get_template_directory_uri() . '/assets/js/filter.js', ['jquery'], '1.0', true);
     }
 
+    // Lightbox
+    wp_enqueue_script('lightbox', get_template_directory_uri() . '/assets/js/lightbox.js', array(), null, true);
+
     // Select2
     wp_enqueue_style('select2-css', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
     wp_enqueue_script('select2-js', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), null, true);

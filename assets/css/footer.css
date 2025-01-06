@@ -4,6 +4,7 @@ footer {
     justify-content: center;
     height: 40px;
     border-top: 1px solid var(--secondary-normal-color);
+    margin-top: 40px;
 }
 
 #menu-footer {
@@ -45,6 +46,7 @@ footer p {
         flex-direction: column;
         text-align: center;
         margin: auto;
+        margin-top: 40px;
     }
     footer p {
         margin: 0;

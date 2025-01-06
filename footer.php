@@ -10,6 +10,7 @@
         ?>
         <p class="textFooter">TOUS DROITS RÉSERVÉS</p>
         <?php get_template_part( 'assets/parts/modal' ); ?>
+        <?php get_template_part( 'assets/parts/lightbox' ); ?>
     </footer>
     <?php wp_footer(); ?>
 </body>
