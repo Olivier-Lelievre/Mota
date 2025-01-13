@@ -64,6 +64,7 @@
                         if ($post) {
                             $thumbnail = get_field('image', $post->ID);
                             // opérateur ternaire pour écrire des conditions simples en une seule ligne
+                            // $variable = condition ($direction === 'prev') ? valeur_si_vrai : valeur_si_faux;
                             $arrow = $direction === 'prev' ? '←' : '→';
                             $ariaLabel = $direction === 'prev' ? 'précédent' : 'suivant';
                             $class = $direction === 'prev' ? 'nav-prev' : 'nav-next';

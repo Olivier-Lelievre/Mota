@@ -9,6 +9,7 @@
     margin: auto;
     padding-top: 95px;
     padding-bottom: 35px;
+    z-index: 1;
   }
   
   .under-filters-wrapper {

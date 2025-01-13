@@ -53,7 +53,6 @@ add_action('wp_enqueue_scripts', 'nmota_register_assets');
 
 
 
-
 // HEADER : déclarer l'emplacement du menu principal
 function nmota_register_my_menu() {
     register_nav_menu( 'main-menu', __( 'Menu principal', 'text-domain' ) );
@@ -96,6 +95,7 @@ function nmota_register_post_types() {
 	register_post_type( 'photo', $args ); // !!!!! SLUG !!!!! Une fois le CPT enregistré, ne jamais changer ce nom 'photo' (slug) !!!!!
 }
 add_action( 'init', 'nmota_register_post_types' );
+
 
 
 

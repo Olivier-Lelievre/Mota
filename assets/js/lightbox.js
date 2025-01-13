@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function openLightbox(index) {
         const photo = photos[index];
         lightboxImg.src = photo.src;
-        lightboxRef.textContent = `Référence : ${photo.ref}`;
-        lightboxCat.textContent = `Catégorie : ${photo.cat}`;
+        lightboxRef.textContent = `Réf. ${photo.ref}`;
+        lightboxCat.textContent = `${photo.cat}`;
         lightbox.classList.add('openLightbox');
         currentIndex = index;
     }

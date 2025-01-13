@@ -46,17 +46,17 @@ main {
 }
 
 .photoContent01-image {
-    width: 100%; /* Remplit toute la largeur */
-    height: 100%; /* Remplit toute la hauteur */
-    overflow: hidden; /* Empêche les débordements */
-    position: relative; /* Nécessaire pour des ajustements internes éventuels */
+    width: 100%;
+    height: 100%; 
+    overflow: hidden; 
+    position: relative; 
 }
 
 .contentImage {
-    width: 100%; /* Remplit toujours toute la largeur du parent */
-    height: 100%; /* Remplit toujours toute la hauteur du parent */
+    width: 100%; 
+    height: 100%; 
     object-fit: cover; /* Remplit l'espace tout en coupant l'excédent si nécessaire */
-    object-position: center; /* Centre l'image pour un rendu harmonieux */
+    object-position: center;
 }
 
 .photoContent02 {
@@ -85,6 +85,7 @@ main {
     border:none;
     background-color: var(--grey-medium);
     font-family: 'SpaceMono';
+    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
 }
 .photoContent02-contact button:hover {
     color: white;
@@ -121,7 +122,6 @@ main {
     bottom: 8px;
     position: relative;
 }
-
 
 /* Les prévisualisations sont masquées par défaut */
 .preview-image {
@@ -194,15 +194,17 @@ main {
 }
 
 
-
-
-
 @media (max-width: 1224px) {
     .photoContent02-contact button {
         width: 152px;
     }
     .photoContent {
         z-index: -1;
+    }
+    .photoContent01 div h2 {
+        font-size: 48px;
+        padding-bottom: 15px;
+        width: 75%;
     }
 }
 
@@ -249,7 +251,7 @@ main {
         padding-right: 25px;
     }
     .photoContent01 div h2 {
-        font-size: 36px;
+        font-size: 32px;
         padding-bottom: 15px;
     }
 }

@@ -12,10 +12,8 @@ buttonMobile.addEventListener('click', () => {
 
 
 /** MODALE CONTACT **/
-
 const modalContact = document.querySelector('#myModal');
 const menuButtonsContact = document.querySelectorAll('.menu-item-25, .buttonSingleContact');
-
 // Fonction pour ouvrir/fermer la modale et fermer le menu burger
 const toggleModal = () => {
   modalContact.classList.toggle('openModal');
@@ -23,12 +21,10 @@ const toggleModal = () => {
   menuMobile.classList.remove('openMenu');
   buttonMobile.classList.remove('crossBurger');
 };
-
 // Ajouter un gestionnaire d'événements à chaque élément
 menuButtonsContact.forEach(button => {
   button.addEventListener('click', toggleModal);
 });
-
 /** fermeture de la modale - Clic en dehors **/
 window.onclick = function(event) {
   if (event.target == modalContact) {

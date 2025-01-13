@@ -31,7 +31,7 @@
 }
 
 .lightbox-info {
-    display: flex; /* Active Flexbox */
+    display: flex;
     justify-content: space-between;
     color: white;
     margin-top: 10px;
@@ -39,9 +39,9 @@
 
 .lightbox-nav {
     position: absolute;
-    display: flex; /* Active Flexbox */
-    align-items: center; /* Centre verticalement */
-    justify-content: center; /* Centre horizontalement */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
     gap: 8px;
     top: 50%;
     background: none;
@@ -98,10 +98,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Overlay noir à 80% */
+    background: rgba(0, 0, 0, 0.8);
     padding: 0;
     margin: 0;
-    opacity: 0; /* Caché par défaut */
+    opacity: 0; 
     transition: opacity 0.3s ease;
   }
 
@@ -137,9 +137,8 @@
     margin: 15px;
   }
   
-  /* Effet au survol */
   .photo-item:hover .overlay {
-    opacity: 1; /* Affiche l'overlay au survol */
+    opacity: 1; 
   }
 
 @media (max-width: 1024px) {

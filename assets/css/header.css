@@ -79,7 +79,7 @@ header button {
     }
     header div {
         display: flex;
-        z-index: 2;
+        z-index: 4;
         background-color: #ffffff;
         align-items: center;
         justify-content: space-between;
@@ -96,7 +96,7 @@ header button {
     header nav {
         display: flex;
         position: fixed;
-        z-index: 0;
+        z-index: 2;
         top: 73px;
         left: 0;
         width: 100%;
@@ -105,7 +105,6 @@ header button {
         opacity: 0.5;
         transform: translateY(-115%);
         transition: all 0.25s ease-out;
-        
     }
     header button {
         display: block;
