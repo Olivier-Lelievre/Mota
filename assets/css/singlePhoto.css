@@ -198,9 +198,6 @@ main {
     .photoContent02-contact button {
         width: 152px;
     }
-    .photoContent {
-        z-index: -1;
-    }
     .photoContent01 div h2 {
         font-size: 48px;
         padding-bottom: 15px;

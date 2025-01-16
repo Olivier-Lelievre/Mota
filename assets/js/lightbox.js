@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Navigation
     function showNext() {
+        // Le modulo (%) garantit que l'index reste dans les limites du tableau photos. Sinon revient à 0.
         currentIndex = (currentIndex + 1) % photos.length;
         openLightbox(currentIndex);
     }

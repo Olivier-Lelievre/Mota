@@ -12,6 +12,7 @@ function mota_load_photos() {
     $limit = 8;
 
     // 'category' : filtre basé sur la catégorie sélectionnée
+    // Vérifie si la clé 'category' existe dans le tableau $_POST
     $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
     // 'format' : filtre basé sur le format sélectionné
     $format = isset($_POST['format']) ? sanitize_text_field($_POST['format']) : '';

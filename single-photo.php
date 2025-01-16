@@ -60,36 +60,50 @@
                 ?>
                 <nav class="navigation-wrapper" aria-label="Navigation entre posts">
                     <?php 
+                    // Fonction pour générer un élément de navigation (précédent ou suivant)
                     function render_navigation_item($post, $direction) {
+                        // Vérifie si le post existe
                         if ($post) {
+                            // Récupère l'image associée au post
                             $thumbnail = get_field('image', $post->ID);
+
                             // opérateur ternaire pour écrire des conditions simples en une seule ligne
                             // $variable = condition ($direction === 'prev') ? valeur_si_vrai : valeur_si_faux;
                             $arrow = $direction === 'prev' ? '←' : '→';
+
+                            // Définit l'attribut aria-label pour indiquer la direction (précédent ou suivant)
                             $ariaLabel = $direction === 'prev' ? 'précédent' : 'suivant';
+
+                            // Définit une classe CSS spécifique en fonction de la direction
                             $class = $direction === 'prev' ? 'nav-prev' : 'nav-next';
                             ?>
+                            <!-- Conteneur de l'élément de navigation -->
                             <div class="nav-item <?php echo $class; ?>">
-                                <?php if (!empty($thumbnail['sizes']['thumbnail'])) : ?>
+                                <?php 
+                                // Vérifie si une image existe pour ce post et l'affiche si elle est présente
+                                if (!empty($thumbnail['sizes']['medium'])) : ?>
                                     <div class="preview-image">
-                                        <img src="<?php echo esc_url($thumbnail['sizes']['thumbnail']); ?>"
-                                            alt="<?php echo esc_attr($thumbnail['alt']); ?>">
+                                        <img src="<?php echo esc_url($thumbnail['sizes']['medium']); ?>" 
+                                            alt="<?php echo esc_attr($thumbnail['alt']); ?>"> 
                                     </div>
                                 <?php endif; ?>
+                                <!-- Lien vers le post, avec flèche et aria-label pour l'accessibilité -->
                                 <a href="<?php echo get_permalink($post->ID); ?>" class="nav-arrow"
                                 aria-label="Voir le post <?php echo $ariaLabel; ?> : <?php echo esc_attr(get_the_title($post->ID)); ?>">
-                                    <?php echo $arrow; ?>
+                                    <?php echo $arrow; ?> <!-- Affiche la flèche (← ou →) -->
                                 </a>
                             </div>
                             <?php
                         }
                     }
 
-                    // Afficher le post précédent et suivant
+                    // Appelle la fonction pour afficher le post précédent
                     render_navigation_item($prevPost, 'prev');
+                    // Appelle la fonction pour afficher le post suivant
                     render_navigation_item($nextPost, 'next');
                     ?>
                 </nav>
+
 
             </div>
         </div>
